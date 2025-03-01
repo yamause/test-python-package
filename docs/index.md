@@ -1,6 +1,6 @@
 # Yamause の Python お試し部屋
 
-Python のパッケージングと autodoc を利用したドキュメント作成の個人的な練習ノートだよ
+Python のパッケージングと mkdocs を利用したドキュメント作成の個人的な練習ノートだよ
 
 ## memo
 
