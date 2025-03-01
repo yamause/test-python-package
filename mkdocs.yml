@@ -1,0 +1,76 @@
+site_name: Yamause の Python お試し部屋
+
+# リポジトリへのリンク
+repo_url: https://github.com/example/repository/
+
+# リポジトリリンクの表示名（Default：GitHub）
+repo_name: GitHub
+
+# リポジトリリンクの追加パラメーター
+# repo_url と結合して、ドキュメントのソースへの直接リンクを生成
+edit_uri: edit/master/docs/
+
+site_description: hogehogehoge
+
+theme:
+  name: material
+  locale: en
+  logo: img/yamause.png
+  favicon: img/yamause.png
+
+  features:
+    # - navigation.tracking
+    # - navigation.instant
+    # - header.autohide
+    - navigation.sections
+    - navigation.top # 画面をスクロールすると表示されるトップボタン
+    - navigation.tabs # ナビゲーションをヘッダータブに表示
+    # - navigation.tabs.sticky # タブを固定
+    - navigation.footer # フッターを表示
+    - navigation.indexes # index.md をディレクトリのトップページとして表示
+    - navigation.expand
+    - search.suggest
+    - navigation.path
+    # - content.action.edit # 編集リンクを付与
+    # - content.action.view # ページのソースを表示
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+    # - toc.integrate # ToCをサイドバーに統合する
+    # - toc.follow
+    # - content.tooltips
+    # - content.footnote.tooltips
+
+nav:
+  - Home: index.md
+  - Getting started:
+      - Installation: getting_started/installation.md
+      - Quick start: getting_started/quick_start.md
+  - Reference:
+      - reference/hoge.md
+  - Mermaid:
+      - mermaid/
+plugins:
+  - search
+  - mkdocstrings
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          # format: python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      use_pygments: true
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+      extend_pygments_lang:
+        - name: php-inline
+          lang: php
+          options:
+            startinline: true
+
+  - pymdownx.inlinehilite:
+  - pymdownx.snippets:

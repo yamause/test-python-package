@@ -1,0 +1,3 @@
+# hoge
+
+::: yamause.example
