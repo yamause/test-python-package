@@ -1,14 +1,14 @@
 site_name: Yamause の Python お試し部屋
 
 # リポジトリへのリンク
-repo_url: https://github.com/example/repository/
+repo_url: https://github.com/yamause/test-python-package
 
 # リポジトリリンクの表示名（Default：GitHub）
 repo_name: GitHub
 
 # リポジトリリンクの追加パラメーター
 # repo_url と結合して、ドキュメントのソースへの直接リンクを生成
-edit_uri: edit/master/docs/
+# edit_uri: edit/master/docs/
 
 site_description: hogehogehoge
 
