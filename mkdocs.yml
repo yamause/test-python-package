@@ -22,17 +22,17 @@ theme:
     # - navigation.tracking
     # - navigation.instant
     # - header.autohide
-    - navigation.sections
+    # - navigation.sections # セクションを折りたたまない場合はコメントアウト
     - navigation.top # 画面をスクロールすると表示されるトップボタン
     - navigation.tabs # ナビゲーションをヘッダータブに表示
     # - navigation.tabs.sticky # タブを固定
     - navigation.footer # フッターを表示
     - navigation.indexes # index.md をディレクトリのトップページとして表示
-    - navigation.expand
+    - navigation.expand # ナビゲーションを開いた状態で表示
     - search.suggest
     - navigation.path
-    # - content.action.edit # 編集リンクを付与
-    # - content.action.view # ページのソースを表示
+    - content.action.edit # 編集リンクを付与
+    - content.action.view # ページのソースを表示
     - content.code.copy
     - content.code.select
     - content.code.annotate
@@ -47,18 +47,24 @@ nav:
       - Installation: getting_started/installation.md
       - Quick start: getting_started/quick_start.md
   - Reference:
-      - reference/hoge.md
-  - Mermaid:
-      - mermaid/
+      - reference/yamause.md
+  - MkDocs:
+      - mkdocs/index.md
+      - mkdocs/mermaid.md
+      - mkdocs/code_anon.md
+      - Hogehoge:
+          - mkdocs/hogehoge/index.md
+          - mkdocs/hogehoge/fuga.md
+
 plugins:
   - search
   - mkdocstrings
+
 markdown_extensions:
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
           class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.highlight:
@@ -71,6 +77,5 @@ markdown_extensions:
           lang: php
           options:
             startinline: true
-
   - pymdownx.inlinehilite:
   - pymdownx.snippets:

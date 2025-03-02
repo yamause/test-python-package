@@ -1,5 +1,14 @@
-# Example Package
+# Python パッケージングと mkdocs でのドキュメント生成の練習用リポジトリ
 
-This is a simple example package. You can use
-[GitHub-flavored Markdown](https://guides.github.com/features/mastering-markdown/)
-to write your content.
+
+## Install
+
+検証用に作ったプログラムをインストールするにはつぎのコマンドを実行します。
+
+```
+pip install git+https://github.com/yamause/test-python-package.git
+```
+
+## Docs
+
+https://yamause.github.io/test-python-package/
