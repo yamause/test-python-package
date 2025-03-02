@@ -5,6 +5,7 @@ repo_url: https://github.com/yamause/test-python-package
 
 # リポジトリリンクの表示名（Default：GitHub）
 repo_name: GitHub
+remote_branch: gh-pages
 
 # リポジトリリンクの追加パラメーター
 # repo_url と結合して、ドキュメントのソースへの直接リンクを生成
