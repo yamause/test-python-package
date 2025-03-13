@@ -1,3 +1,4 @@
 # yamause
 
+::: yamause
 ::: yamause.example

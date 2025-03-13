@@ -10,6 +10,11 @@ class Yamause:
     def add_one(self, num: int) -> int:
         """指定された数値に1を加えます。
 
+        Examples:
+            >>> yamause = Yamause()
+            >>> yamause.add_one(1)
+            2
+
         Args:
             num (int): 加える対象の数値。
 
@@ -29,6 +34,10 @@ class Yamause:
 
 def add_one(hogehoge: int) -> int:
     """指定された数値に1を加えます。
+
+    Examples:
+        >>> add_one(1)
+        2
 
     Args:
         hogehoge (int): 加える対象の数値。
