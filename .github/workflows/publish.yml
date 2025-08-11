@@ -45,8 +45,8 @@ jobs:
       - name: Configure AWS credentials using OIDC
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           role-session-name: GitHubActions-CodeArtifact
 
       - name: Get CodeArtifact authorization token
