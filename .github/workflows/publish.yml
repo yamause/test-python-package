@@ -56,6 +56,7 @@ jobs:
             --domain-owner ${{ secrets.CODEARTIFACT_DOMAIN_OWNER }} \
             --query authorizationToken \
             --output text)
+          echo "::add-mask::$CODEARTIFACT_AUTH_TOKEN"
           echo "CODEARTIFACT_AUTH_TOKEN=$CODEARTIFACT_AUTH_TOKEN" >> $GITHUB_ENV
 
       - name: Get CodeArtifact repository endpoint
@@ -67,6 +68,7 @@ jobs:
             --format pypi \
             --query repositoryEndpoint \
             --output text)
+          echo "::add-mask::$CODEARTIFACT_REPO_URL"
           echo "CODEARTIFACT_REPO_URL=$CODEARTIFACT_REPO_URL" >> $GITHUB_ENV
 
       - name: Upload package to CodeArtifact
@@ -80,5 +82,4 @@ jobs:
       - name: Verify upload
         run: |
           echo "Package uploaded successfully to CodeArtifact!"
-          echo "Repository URL: ${{ env.CODEARTIFACT_REPO_URL }}"
           echo "Package: yamause version $VERSION"

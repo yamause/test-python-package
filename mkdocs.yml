@@ -48,6 +48,8 @@ nav:
       - Quick start: getting_started/quick_start.md
   - Reference:
       - reference/yamause.md
+  - Deployment:
+      - deployment/codeartifact-setup.md
   - MkDocs:
       - mkdocs/index.md
       - mkdocs/mermaid.md
