@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
@@ -20,11 +20,17 @@ license = "MIT"
 license-files = ["LICEN[CS]E*"]
 
 [project.urls]
-Homepage = "https://github.com/pypa/sampleproject"
-Issues = "https://github.com/pypa/sampleproject/issues"
+Homepage = "https://yamause.github.io/test-python-package/"
+Issues = "https://github.com/yamause/test-python-package/issues"
 
 [project.scripts]
 yamause = "yamause.example:say"
 
 [tool.hatch.version]
-path = "yamause/__about__.py"
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/yamause/_version.py"
+
+[tool.hatch.version.raw-options]
+version_scheme = "no-guess-dev"
