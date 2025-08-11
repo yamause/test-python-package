@@ -1,4 +1,4 @@
 # yamause
 
-::: yamause
-::: yamause.example
+::: src.yamause
+::: src.yamause.example
