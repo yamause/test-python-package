@@ -4,7 +4,6 @@ build-backend = "hatchling.build"
 
 [project]
 name = "yamause"
-version = "0.0.1"
 authors = [
   { name="Yamause", email="yamause@example.com" },
 ]
@@ -25,3 +24,6 @@ Issues = "https://github.com/pypa/sampleproject/issues"
 
 [project.scripts]
 yamause = "yamause.example:say"
+
+[tool.hatch.version]
+path = "yamause/__about__.py"
