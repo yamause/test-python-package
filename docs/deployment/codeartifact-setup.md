@@ -48,6 +48,11 @@ AWS IAMコンソールで以下の設定でOIDC Identity Providerを作成しま
 
 以下の権限を持つポリシーを作成し、上記のロールにアタッチします：
 
+参考
+
+- [AWS CodeArtifact アクセス許可リファレンス](https://docs.aws.amazon.com/ja_jp/codeartifact/latest/ug/auth-and-access-control-permissions-reference.html)
+- [IAM ユーザーのプロビジョニング](https://docs.aws.amazon.com/ja_jp/codeartifact/latest/ug/get-set-up-provision-user.html)
+
 ```json
 {
   "Version": "2012-10-17",
@@ -61,7 +66,8 @@ AWS IAMコンソールで以下の設定でOIDC Identity Providerを作成しま
       ],
       "Resource": [
         "arn:aws:codeartifact:YOUR_REGION:YOUR_ACCOUNT_ID:domain/YOUR_DOMAIN",
-        "arn:aws:codeartifact:YOUR_REGION:YOUR_ACCOUNT_ID:repository/YOUR_DOMAIN/YOUR_REPOSITORY"
+        "arn:aws:codeartifact:YOUR_REGION:YOUR_ACCOUNT_ID:repository/YOUR_DOMAIN/YOUR_REPOSITORY",
+        "arn:aws:codeartifact:YOUR_REGION:YOUR_ACCOUNT_ID:package/YOUR_DOMAIN/YOUR_REPOSITORY/*"
       ]
     },
     {
