@@ -2,16 +2,10 @@ name: Package and Upload to CodeArtifact
 
 on:
   push:
-    tags:
-      - 'v*'  # バージョンタグがプッシュされた時にトリガー
-  workflow_dispatch:  # 手動実行も可能
-
-permissions:
-  id-token: write  # OIDC認証に必要
-  contents: read
 
 jobs:
-  build-and-upload:
+  build:
+    name: Build Python Package
     runs-on: ubuntu-latest
 
     steps:
@@ -21,32 +15,40 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Install build dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install build twine
+          python3 -m pip install --upgrade pip
+          pip install --user build
 
       - name: Build package
-        run: python -m build
+        run: python3 -m build
 
+      - name: Store the distribution packages
+        uses: actions/upload-artifact@v5
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+        with:
+          name: python-package-distributions
+          path: dist/
+          retention-days: 3
+
+  publish-to-codeartifact:
+    name: Publish Python distribution to CodeArtifact
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') # タグがvで始まる場合のみ実行
+    needs:
+      - build
+    permissions:
+      id-token: write # OIDC認証に必要
+
+    steps:
       - name: Configure AWS credentials using OIDC
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ${{ secrets.AWS_REGION }}
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           role-session-name: GitHubActions-CodeArtifact
-
-      - name: Get CodeArtifact authorization token
-        run: |
-          CODEARTIFACT_AUTH_TOKEN=$(aws codeartifact get-authorization-token \
-            --domain ${{ secrets.CODEARTIFACT_DOMAIN }} \
-            --domain-owner ${{ secrets.CODEARTIFACT_DOMAIN_OWNER }} \
-            --query authorizationToken \
-            --output text)
-          echo "::add-mask::$CODEARTIFACT_AUTH_TOKEN"
-          echo "CODEARTIFACT_AUTH_TOKEN=$CODEARTIFACT_AUTH_TOKEN" >> $GITHUB_ENV
 
       - name: Get CodeArtifact repository endpoint
         run: |
@@ -60,15 +62,13 @@ jobs:
           echo "::add-mask::$CODEARTIFACT_REPO_URL"
           echo "CODEARTIFACT_REPO_URL=$CODEARTIFACT_REPO_URL" >> $GITHUB_ENV
 
-      - name: Upload package to CodeArtifact
-        run: |
-          python -m twine upload \
-            --repository-url ${{ env.CODEARTIFACT_REPO_URL }} \
-            --username aws \
-            --password ${{ env.CODEARTIFACT_AUTH_TOKEN }} \
-            dist/*
+      - name: Download all the dists
+        uses: actions/download-artifact@v5
+        with:
+          name: python-package-distributions
+          path: dist/
 
-      - name: Verify upload
-        run: |
-          echo "Package uploaded successfully to CodeArtifact!"
-          echo "Package: yamause version $VERSION"
+      - name: Publish distribution to CodeArtifact
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: ${{ env.CODEARTIFACT_REPO_URL }}
