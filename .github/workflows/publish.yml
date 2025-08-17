@@ -50,17 +50,14 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           role-session-name: GitHubActions-CodeArtifact
 
-      - name: Get CodeArtifact repository endpoint
+      - name: Login twine by CodeArtifact
         run: |
-          CODEARTIFACT_REPO_URL=$(aws codeartifact get-repository-endpoint \
+          aws codeartifact login \
+            --tool twine \
             --domain ${{ secrets.CODEARTIFACT_DOMAIN }} \
             --domain-owner ${{ secrets.CODEARTIFACT_DOMAIN_OWNER }} \
             --repository ${{ secrets.CODEARTIFACT_REPOSITORY }} \
-            --format pypi \
-            --query repositoryEndpoint \
-            --output text)
-          echo "::add-mask::$CODEARTIFACT_REPO_URL"
-          echo "CODEARTIFACT_REPO_URL=$CODEARTIFACT_REPO_URL" >> $GITHUB_ENV
+            --region ${{ secrets.AWS_REGION }}
 
       - name: Download all the dists
         uses: actions/download-artifact@v5
@@ -70,5 +67,3 @@ jobs:
 
       - name: Publish distribution to CodeArtifact
         uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          repository-url: ${{ env.CODEARTIFACT_REPO_URL }}
