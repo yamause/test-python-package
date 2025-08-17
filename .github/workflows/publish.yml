@@ -81,6 +81,7 @@ jobs:
       - name: Publish distribution to CodeArtifact
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          username: aws
+          user: aws
           password: ${{ env.CODEARTIFACT_AUTH_TOKEN }}
           repository-url: ${{ env.CODEARTIFACT_REPO_URL }}
+          attestations: false
