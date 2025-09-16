@@ -1,3 +1,8 @@
+---
+tags:
+    - python
+---
+
 # yamause
 
 ::: src.yamause

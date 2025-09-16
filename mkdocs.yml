@@ -28,7 +28,7 @@ theme:
     # - navigation.tabs.sticky # タブを固定
     - navigation.footer # フッターを表示
     - navigation.indexes # index.md をディレクトリのトップページとして表示
-    - navigation.expand # ナビゲーションを開いた状態で表示
+    # - navigation.expand # ナビゲーションを開いた状態で表示
     - search.suggest
     - navigation.path
     - content.action.edit # 編集リンクを付与
@@ -43,24 +43,43 @@ theme:
 
 nav:
   - Home: index.md
-  - Getting started:
-      - Installation: getting_started/installation.md
-      - Quick start: getting_started/quick_start.md
-  - Reference:
-      - reference/yamause.md
-  - Deployment:
-      - deployment/codeartifact-setup.md
-  - MkDocs:
-      - mkdocs/index.md
-      - mkdocs/mermaid.md
-      - mkdocs/code_anon.md
-      - Hogehoge:
-          - mkdocs/hogehoge/index.md
-          - mkdocs/hogehoge/fuga.md
+  - ハンドブック:
+      - handbooks/index.md
+      - コーディング規約:
+        - handbooks/coding_style/python.md
+        - handbooks/coding_style/ansible.md
+      - アーキテクチャガイドライン:
+        - handbooks/architecture_guideline/aws/index.md
+        - handbooks/architecture_guideline/fastapi/index.md
+      - テストガイドライン:
+        - handbooks/test_guideline/python/index.md
+      - セキュリティガイドライン:
+        - handbooks/security_guideline/aws/index.md
+      - 運用ガイドライン:
+        - MkDocs:
+          - handbooks/operation_guideline/mkdocs/index.md
+          - handbooks/operation_guideline/mkdocs/mermaid.md
+          - handbooks/operation_guideline/mkdocs/code_anon.md
+          - handbooks/operation_guideline/mkdocs/blog.md
+        - AWS:
+          - handbooks/operation_guideline/aws/codeartifact-setup.md
+      - ベストプラクティス:
+        - handbooks/best_practices/python_packaging.md
+        - handbooks/best_practices/fastapi.md
+  - システム:
+      - systems/yamause.md
+  - Blog:
+      - blog/index.md
 
 plugins:
   - search
   - mkdocstrings
+  - blog:
+      categories_allowed:
+        - tech
+        - news
+        - poem
+  - tags
 
 markdown_extensions:
   - pymdownx.superfences:
@@ -81,3 +100,8 @@ markdown_extensions:
             startinline: true
   - pymdownx.inlinehilite:
   - pymdownx.snippets:
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
