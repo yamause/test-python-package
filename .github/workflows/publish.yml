@@ -2,6 +2,10 @@ name: Package and Upload to CodeArtifact
 
 on:
   push:
+    branches:
+      - main
+    tags:
+      - 'v*'
 
 jobs:
   build:
