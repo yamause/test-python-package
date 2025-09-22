@@ -5,7 +5,7 @@
 
 検証用に作ったプログラムをインストールするにはつぎのコマンドを実行します。
 
-```
+```sh
 pip install git+https://github.com/yamause/test-python-package.git
 ```
 

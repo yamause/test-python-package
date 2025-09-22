@@ -1,0 +1,24 @@
+name: lint and test
+
+on:
+  pull_request:
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.13
+
+      - name: Install pre-commit
+        uses: pre-commit/action@v3.0.1
+
+      - name: pytest
+        run: |
+          pip install -e .[dev]
+          pytest

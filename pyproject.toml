@@ -26,6 +26,12 @@ Issues = "https://github.com/yamause/test-python-package/issues"
 [project.scripts]
 yamause = "yamause.example:say"
 
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff"
+]
+
 [tool.hatch.version]
 source = "vcs"
 
@@ -34,3 +40,34 @@ version-file = "src/yamause/_version.py"
 
 [tool.hatch.version.raw-options]
 version_scheme = "no-guess-dev"
+
+[tool.ruff]
+line-length = 120
+include = [
+    "src/**/*.py",
+    "tests/**/*.py"
+]
+
+exclude = [
+    "_version.py"
+    ]
+
+[tool.ruff.lint]
+
+select = [
+    "E",  # pydocstyle
+    "F",  # Pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C",  # flake8-comprehensions
+    "D",  # pydocstyle
+    "N",  # pep8-naming
+    ]
+
+ignore = [
+    "D415",  # 最初の行がピリオド、疑問符、感嘆符などの句読点で終わっていない docstring をチェック
+    "D107",  # docstring が欠落している public __init__ メソッド定義をチェック
+    ]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"

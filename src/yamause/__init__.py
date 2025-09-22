@@ -1,2 +1,1 @@
-"""Example of a package with a single module.
-"""
+"""Example of a package with a single module."""
